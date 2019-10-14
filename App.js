@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, StatusBar } from 'react-native';
 // import PigTailLoad from './components/PigTailLoad.jsx';
 import { AppLoading, SplashScreen } from 'expo';
 import { Asset } from 'expo-asset';
@@ -41,10 +41,12 @@ export default class App extends React.Component {
 
      if(!this.state.isAppReady){
       return(
+
         <View style={styles.mainView}>
-        <Image style={styles.pigpic}
-          source={require('./assets/loadingPig.png')} 
-          onLoad={this._cacheResourcesAsync}  />
+          <StatusBar hidden />
+          <Image style={styles.pigpic}
+            source={require('./assets/StartScreen.png')} 
+            onLoad={this._cacheResourcesAsync}  />
         </View>
       )
 
@@ -52,6 +54,7 @@ export default class App extends React.Component {
 
   return (
     <View style={styles.mainView}>
+      <StatusBar hidden />
       <EntryScreen />
     </View>
       );
@@ -73,7 +76,7 @@ _cacheSplashResourcesAsync = async ()=>{
 _cacheResourcesAsync = async () => {
   SplashScreen.hide();
   const images = [
-    require('./assets/menuScreen.png')
+    require('./assets/StartScreen.png')
   ];
 
   const cacheImages = images.map(image => {
