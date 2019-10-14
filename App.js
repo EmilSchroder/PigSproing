@@ -1,8 +1,24 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Text } from 'react-native';
 // import PigTailLoad from './components/PigTailLoad.jsx';
 import { AppLoading, SplashScreen } from 'expo';
 import { Asset } from 'expo-asset';
+
+import EntryScreen from "./components/EntryScreen"
+
+const styles = StyleSheet.create({
+  mainView: {
+    display: 'flex',
+    alignItems: "center",
+    justifyContent: "center",
+    resizeMode: "contain",
+    flex: 1
+  },
+  pigpic: {
+    width: 400,
+    height: 400
+  }
+})
 
 export default class App extends React.Component {
 
@@ -11,13 +27,7 @@ export default class App extends React.Component {
     isAppReady: false
   }
 
-
-
   render() {
-
-
-
-    
     if(!this.state.isSplashReady){
       return (
         <AppLoading
@@ -31,38 +41,19 @@ export default class App extends React.Component {
 
      if(!this.state.isAppReady){
       return(
-        <View style={{flex: 1, 
-          resizeMode: "contain"}}>
-        <Image style={{width: 200, height: 200}}
+        <View style={styles.mainView}>
+        <Image style={styles.pigpic}
           source={require('./assets/loadingPig.png')} 
           onLoad={this._cacheResourcesAsync}  />
-        {/* <Animated.Image
-          style={{
-            width: 200,
-            height: 200,
-            transform: [{ rotate: RotateData }],
-          }}
-          source={require('../assets/loadingPig.png')}
-        /> */}
-      </View>
-        // <View>
-        //   <PigTailLoad 
-        //     onLoad={this._cacheResourcesAsync} 
-        //   />
-        //   <text>Test</text>
-        // </View>
+        </View>
       )
 
     }
 
   return (
-        <View>
-          <Image 
-            style ={{flex: 1, width: 200, height: 200, 
-            resizeMode: "contain"}}
-           source={require('./assets/splash.png')}
-          />
-        </View>
+    <View style={styles.mainView}>
+      <EntryScreen />
+    </View>
       );
 
       
@@ -82,7 +73,7 @@ _cacheSplashResourcesAsync = async ()=>{
 _cacheResourcesAsync = async () => {
   SplashScreen.hide();
   const images = [
-    require('./assets/splash.png')
+    require('./assets/menuScreen.png')
   ];
 
   const cacheImages = images.map(image => {
